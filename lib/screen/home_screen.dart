@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_netflix/model/model_movie.dart';
+import 'package:flutter_netflix/widget/carousel_slider.dart';
 
 // 데이터를 백엔드에서 가져와야하는 경우 StatefulWidget 사용?
 class HomeScreen extends StatefulWidget {
@@ -6,6 +8,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Movie> movies = [
+    Movie.fromMap({
+      'title': '사랑의 불시착',
+      'keyword': '사랑/로맨스/판타지',
+      'poster': 'test_movie_1.png',
+      'like': false,
+    }),
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -13,7 +24,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return TopBar();
+    return ListView(
+      children: <Widget>[
+        Stack(
+          children: <Widget>[
+            CarouselImage(movies: movies),
+            TopBar(),
+          ],
+        ),
+      ],
+    );
   }
 }
 
